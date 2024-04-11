@@ -1,0 +1,28 @@
+---
+- name: Show Interfaces
+  hosts: network
+  gather_facts: no
+
+  tasks:
+
+  - name: show interfaces for IOS devices
+    cisco.ios.ios_command:
+      commands: show interface
+    register: ios_output
+    when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: display interfaces for IOS devices
+    debug:
+      var: ios_output.stdout_lines
+    when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: show interfaces for JUNOS devices
+    junipernetworks.junos.junos_command:
+      commands: show interface
+    register: junos_output
+    when: ansible_network_os == 'junipernetworks.junos.junos'
+
+  - name: display interfaces for IOS devices
+    debug:
+      var: junos_output.stdout_lines
+    when: ansible_network_os == 'junipernetworks.junos.junos'

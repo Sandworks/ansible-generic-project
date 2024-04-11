@@ -1,0 +1,30 @@
+---
+- name: Gather Domain Name
+  hosts: network
+  gather_facts: no
+
+  tasks:
+
+  - name: "Gather domain name on {{ inventory_hostname }}"
+    cisco.ios.ios_command:
+      commands: show run | include domain
+    register: ios_output
+    when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: "Display domain name on {{ inventory_hostname }}"
+    debug:
+      var: ios_output.stdout_lines
+    when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: "Gather domain name on {{ inventory_hostname }}"
+    junipernetworks.junos.junos_command:
+      commands: 
+      - configure
+      - show system domain-name
+    register: junos_output
+    when: ansible_network_os == 'junipernetworks.junos.junos'
+
+  - name: "Display domain name on {{ inventory_hostname }}"
+    debug:
+      var: junos_output.stdout_lines
+    when: ansible_network_os == 'junipernetworks.junos.junos'
