@@ -1,0 +1,16 @@
+---
+- name: a play that exposes the current access vars
+  hosts: network
+  gather_facts: no
+
+  tasks:
+
+  - name: show the value of key variables
+    debug:
+      msg: >
+        host: {{ inventory_hostname }},
+        con: {{ ansible_connection }},
+        nos: {{ ansible_network_os }},
+        user: {{ ansible_user }},
+        pass: {{ ansible_ssh_pass }}
+

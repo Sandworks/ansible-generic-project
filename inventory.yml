@@ -1,0 +1,13 @@
+network: 
+  children:
+    ios:
+    junos:
+
+ios:
+  hosts:
+    devnetsandboxiosxe.cisco.com
+
+junos:
+  hosts:
+    devnetsandboxjunos.juniper.com:
+      ansible_host: 66.129.234.213

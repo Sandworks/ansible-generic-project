@@ -1,0 +1,9 @@
+[ios]
+devnetsandboxiosxe.cisco.com
+
+[junos]
+devnetsandboxjunos.juniper.com ansible_host=66.129.234.213
+
+[network:children]
+junos
+ioscd 
