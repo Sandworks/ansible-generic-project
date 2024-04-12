@@ -1,0 +1,6 @@
+set system host-name {{ inventory_hostname }}
+set system domain-name {{ domain_name }}
+{% for ns in name_servers %}
+set system name-server {{ ns }}
+{% endfor %}
+

@@ -1,0 +1,16 @@
+---
+- name: testing JUNOS configuration
+  hosts: local
+  connection: local
+  gather_facts: no
+
+  vars_files:
+  - group_vars/junos/var.yml
+
+  tasks:
+
+  - name: create junos configuration from jinja
+    template:
+      src: j2/junos-hn-dn-ns.j2
+      dest: out/junos_config.out
+      

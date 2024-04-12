@@ -1,0 +1,12 @@
+---
+- name: testing IOS configuration
+  hosts: ios
+  gather_facts: no
+
+  tasks:
+
+  - name: create ios configuration from jinja
+    template:
+      src: j2/ios-hn-dn-ns.j2
+      dest: ios_config.out
+

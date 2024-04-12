@@ -10,4 +10,8 @@ ios:
 junos:
   hosts:
     devnetsandboxjunos.juniper.com:
-      ansible_host: 66.129.234.212
+      ansible_host: 66.129.234.213
+
+local:
+  hosts:
+    localhost

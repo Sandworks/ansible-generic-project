@@ -1,2 +1,6 @@
 ansible_network_os: junipernetworks.junos.junos
-ansible_port: 47002
+ansible_port: 36002
+domain_name: lab.example.com
+name_servers:
+- 192.168.0.1
+- 192.168.0.2

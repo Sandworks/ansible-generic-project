@@ -1,0 +1,12 @@
+---
+- name: backup JUNOS
+  hosts: junos
+  gather_facts: no
+
+  tasks:
+
+  - name: Backup current switch config (junos)
+    junipernetworks.junos.junos_config:
+      backup: yes
+    register: backup_junos_location
+    when: ansible_network_os == 'junipernetworks.junos.junos'

@@ -1,0 +1,15 @@
+---
+- name: testing IOS configuration
+  hosts: local
+  connection: local
+  gather_facts: no
+
+  vars_files:
+  - group_vars/ios/var.yml
+
+  tasks:
+
+  - name: create ios configuration from jinja
+    template:
+      src: j2/ios-hn-dn-ns.j2
+      dest: out/ios_config.out

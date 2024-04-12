@@ -1,0 +1,41 @@
+---
+- name: multi-vendor play that asserts value of domain name
+  hosts: network
+  gather_facts: no
+  connection: ansible.netcommon.network_cli
+
+  vars:
+    correct_domain: lab.example.com
+    ios_command: show run | i ip domain name
+    junos_command: show system domain-name
+
+  tasks:
+
+  - name: "{{ ios_command }} on IOS device"
+    cisco.ios.ios_command:
+      commands:
+      - "{{ ios_command }}"
+    register: ios_result
+    when: ansible_network_os == 'cisco.ios.ios'
+  
+  - name: "assert IOS device is in {{ correct_domain }}"
+    #debug:
+    #  var: ios_result.stdout[0]
+    assert:
+      that: "'{{ correct_domain }}' in ios_result.stdout[0]"
+    when: ansible_network_os == 'cisco.ios.ios'
+
+  - name: "{{ junos_command }} on JUNOS device"
+    junipernetworks.junos.junos_command:
+      commands:
+      - configure
+      - "{{ junos_command }}"
+    register: junos_result
+    when: ansible_network_os == 'junipernetworks.junos.junos'
+  
+  - name: "assert JUNOS device is in {{ correct_domain }}"
+    #debug:
+    #  var: junos_result.stdout
+    assert:
+      that: "'{{ correct_domain }}' in junos_result.stdout[1]"
+    when: ansible_network_os == 'junipernetworks.junos.junos'

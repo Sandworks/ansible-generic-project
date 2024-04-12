@@ -1,0 +1,5 @@
+set system host-name localhost
+set system domain-name lab.example.com
+set system name-server 192.168.0.1
+set system name-server 192.168.0.2
+

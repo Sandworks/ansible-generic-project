@@ -1,0 +1,12 @@
+---
+- name: testing JUNOS configuration
+  hosts: junos
+  gather_facts: no
+
+  tasks:
+
+  - name: create junos configuration from jinja
+    template:
+      src: j2/junos-hn-dn-ns.j2
+      dest: junos_config.out
+      
