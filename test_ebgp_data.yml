@@ -1,0 +1,15 @@
+---
+- name: testing jinja
+  hosts: border-routers
+  gather_facts: no
+  connection: local
+  
+  vars_files:
+  - vars/ebgp-adjustment-data.yml
+  
+  tasks:
+
+  - name: build template
+    template:
+      src: "j2/{{ ansible_network_os }}-bgp.j2"
+      dest: "out/{{ inventory_hostname}}-bgp.out"

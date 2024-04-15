@@ -1,0 +1,23 @@
+---
+- name: configure devices to support new eBGP neighbors and its networks
+  hosts: spine01
+  gather_facts: no
+
+  vars:
+    ios_bgp_tpl: j2/cisco.ios.ios-bgp.j2
+    vyos_bgp_tpl: j2/vyos.vyos.vyos-bgp.j2
+
+  vars_files:
+    - vars/ebgp-adjustment-data.yml
+
+  tasks:
+
+  - name: "map bgp data to ios device using {{ ios_bgp_tpl }}"
+    cisco.ios.ios_config:
+      src: "{{ ios_bgp_tpl }}"
+    when: ansible_network_os == 'cisco.ios.ios'
+  
+  - name: "map bgp data to ios device using {{ vyos_bgp_tpl }}"
+    vyos.vyos.vyos_config:
+      src: "{{ vyos_bgp_tpl }}"
+    when: ansible_network_os == 'vyos.vyos.vyos'

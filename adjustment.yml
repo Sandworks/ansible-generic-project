@@ -23,5 +23,4 @@
         - name: "{{ item.key }}"
           ipv4: 
             - "{{ item.value.ipv4}}"
-          #  - address: "{{ item.value.ipv4.address}}"
     with_dict: "{{ new_layer3_data[inventory_hostname] }}"

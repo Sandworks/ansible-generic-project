@@ -1,0 +1,8 @@
+cs01
+
+set protocols bgp 17216 parameters router-id 172.16.0.1
+set protocols bgp 17216 neighbor 172.16.2.1 remote-as 10000
+set protocols bgp 17216 neighbor 172.16.5.1 remote-as 19216
+set protocols bgp 17216 network 172.16.10.0/30
+set protocols bgp 17216 network 192.168.0.0/16
+set protocols bgp 17216 network 10.10.0.0/16

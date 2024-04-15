@@ -1,0 +1,8 @@
+spine01
+
+router bgp 10000
+network 10.10.5.0 mask 255.255.255.252
+network 10.10.10.0 mask 255.255.255.252
+neighbor 172.16.2.2 remote-as 17216
+neighbor 172.16.50.2 remote-as 19216
+ 
