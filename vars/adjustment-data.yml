@@ -1,0 +1,29 @@
+new_interface_data:
+  spine01:
+  - { name: TenGigabitEthernet1/0/10, description: spine02-as19216 }
+  spine02:
+  - { name: TenGigabitEthernet1/0/10, description: spine01-as10101 }
+
+new_interface_data2:
+  spine01:
+    TenGigabitEthernet1/0/11:
+      description: spine02-as19216
+  spine02:
+    TenGigabitEthernet1/0/11:
+      description: spine01-as10101
+
+new_layer3_data:
+  spine01:
+    TenGigabitEthernet1/0/10:
+      ipv4: 
+        address: 172.16.50.1/30
+    TenGigabitEthernet1/0/11:
+      ipv4: 
+        address: 172.16.51.1/30
+  spine02:
+    TenGigabitEthernet1/0/10:  
+      ipv4: 
+        address: 172.16.50.2/30
+    TenGigabitEthernet1/0/11:  
+      ipv4: 
+        address: 172.16.51.2/30

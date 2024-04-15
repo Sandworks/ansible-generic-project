@@ -1,0 +1,55 @@
+---
+- name: Test variables
+  hosts: spines
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars/adjustment-data.yml
+
+  tasks:
+
+  #- name:
+  #  debug:
+  #    msg:
+  #      - "{{ new_layer3_data[inventory_hostname] }}"
+  #      - "{{ new_interface_data[inventory_hostname] }}"
+  #      - "{{ new_interface_data[inventory_hostname][eth3].description }}"
+
+  - name: interface configuration - Format 1
+    debug:
+      msg: "{{ new_interface_data[inventory_hostname] }}"
+
+
+  - name: interface configuration - Format 1
+    debug:
+      msg:
+        - "name: {{ item.value }} "
+        - "descripiton: {{ item.value }} "
+    with_dict: "{{ new_interface_data[inventory_hostname] }}"
+
+  - name: interface configuration Format 2
+    debug:
+      msg:
+        - "{{ item.key }}"
+        - "{{ item.value['description']}}"
+    with_dict: "{{ new_interface_data2[inventory_hostname] }}"
+
+  #- name: layer 3 configuration
+  #  debug:
+  #    msg:
+  #      - "{{ item.key }}"
+  #      - "{{ item.value }}"
+  #  with_dict: "{{ new_layer3_data[inventory_hostname] }}"
+
+  #- name: layer 3 configuration
+  #  debug:
+  #    msg:
+  #      - "{{ item }}"
+  # with_dict: " {{ new_layer3_data[inventory_hostname] }}"
+
+  - name: assign L3 addresses
+    debug:
+      msg:
+      - name: "{{ item.key }}"
+      - ipv4: "{{ item.value.ipv4.address}}"
+    with_dict: "{{ new_layer3_data[inventory_hostname] }}"

@@ -1,0 +1,27 @@
+- name: configure interfaces
+  hosts: spines
+  gather_facts: no
+  vars_files:
+    - vars/adjustment-data.yml
+
+  tasks:
+
+  - name: apply description to new interfaces - Format 1
+    cisco.ios.ios_interfaces:
+      config: "{{ new_interface_data[inventory_hostname] }}"
+
+  - name: apply description to new interfaces - Format 2
+    cisco.ios.ios_interfaces:
+      config:
+        - name: "{{ item.key }}"
+          description: "{{ item.value['description']}}"
+    with_dict: "{{ new_interface_data2[inventory_hostname] }}"
+
+  - name: assign L3 addresses
+    cisco.ios.ios_l3_interfaces:
+      config:
+        - name: "{{ item.key }}"
+          ipv4: 
+            - "{{ item.value.ipv4}}"
+          #  - address: "{{ item.value.ipv4.address}}"
+    with_dict: "{{ new_layer3_data[inventory_hostname] }}"

@@ -2,6 +2,7 @@ network:
   children:
     ios:
     junos:
+    spines:
 
 ios:
   hosts:
@@ -11,6 +12,13 @@ junos:
   hosts:
     devnetsandboxjunos.juniper.com:
       ansible_host: 66.129.234.213
+
+spines:
+  hosts:
+    spine01:
+      ansible_host: 10.239.5.112
+    spine02:
+      ansible_host: 10.239.5.117
 
 local:
   hosts:
